@@ -383,37 +383,37 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [DVORAK] = LAYOUT_universal(
-    KC_TAB,  KC_QUOT, KC_COMM, KC_DOT, KC_P, KC_Y,                                  KC_F, KC_G, KC_C, KC_R, KC_L, KC_SLSH,
-    LCTL_LANG,       KC_A,    KC_O,    KC_E,   KC_U, KC_I,                                  KC_D, KC_H, KC_T, KC_N, KC_S, KC_MINS,
-    KC_LSFT,  KC_SCLN, KC_Q,    KC_J,   KC_K, KC_X,                                  KC_B, KC_M, KC_W, KC_V, KC_Z, KC_RSFT,
-              KC_CAPS, KC_LALT, KC_LGUI, LT(2,KC_SPC), LT(3,KC_ESC),   LT(4,KC_ENT), KC_SPC, _______, _______, KC_BTN1
+    KC_TAB    , KC_QUOT , KC_COMM , KC_DOT  , KC_P    , KC_Y         ,                                KC_F   , KC_G    , KC_C    , KC_R    , KC_L    , KC_SLSH ,
+    LCTL_LANG , KC_A    , KC_O    , KC_E    , KC_U    , KC_I         ,                                KC_D   , KC_H    , KC_T    , KC_N    , KC_S    , KC_MINS ,
+    KC_LSFT   , KC_SCLN , KC_Q    , KC_J    , KC_K    , KC_X         ,                                KC_B   , KC_M    , KC_W    , KC_V    , KC_Z    , KC_RSFT ,
+                          KC_CAPS , KC_LALT , KC_LGUI , LT(2,KC_SPC) , LT(3,KC_ESC),   LT(4,KC_ENT) , KC_SPC ,           _______ , _______ , KC_BTN1
   ),
 
   [NICOLA] = LAYOUT_universal(
-    _______, _______, _______, _______, _______, _______,                                   _______, _______, _______, _______, _______, _______,
-    _______, _______, _______, _______, _______, _______,                                   _______, _______, _______, _______, _______, _______,
-    _______, _______, _______, _______, _______, _______,                                   _______, _______, _______, _______, _______, _______,
-    _______, _______, _______, _______, _______,                                                     _______, _______, _______, _______, _______
+    _______ , _______ , _______ , _______ , _______ , _______ ,                                   _______ , _______ , _______ , _______ , _______ , _______ ,
+    _______ , _______ , _______ , _______ , _______ , _______ ,                                   _______ , _______ , _______ , _______ , _______ , _______ ,
+    _______ , _______ , _______ , _______ , _______ , _______ ,                                   _______ , _______ , _______ , _______ , _______ , _______ ,
+                        _______ , _______ , _______ , _______ , _______ ,               _______ , _______ , _______ ,           _______ , _______
   ),
 
   [2] = LAYOUT_universal(
-    KC_TILDE ,  S(KC_1) ,  S(KC_2) ,  S(KC_3) ,  S(KC_4) , S(KC_5)  ,                                       S(KC_6)   ,S(KC_7)   ,S(KC_8)   ,S(KC_9)   ,S(KC_0)   , KC_EQL   ,
-    KC_LBRC  ,  KC_1    ,  KC_2    ,  KC_3    ,  KC_4    ,  KC_5    ,                                         KC_6    ,  KC_7    ,  KC_8    ,  KC_9    ,  KC_0    , KC_RBRC  ,
-    _______  ,  _______ ,  KC_BTN2 ,  KC_BTN3 , KC_BTN1  , KC_LPRN  ,                                        KC_RPRN  , KC_BSLS  , _______  , _______  , _______  , _______  ,
-           _______  , _______ ,      _______  , _______  , _______  ,                              _______  , _______  , _______       , _______  , _______
+    KC_TILDE , S(KC_1) , S(KC_2) , S(KC_3) , S(KC_4) , S(KC_5) ,                                  S(KC_6) , S(KC_7) , S(KC_8) , S(KC_9) , S(KC_0) , KC_EQL  ,
+    KC_LBRC  , KC_1    , KC_2    , KC_3    , KC_4    , KC_5    ,                                  KC_6    , KC_7    , KC_8    , KC_9    , KC_0    , KC_RBRC ,
+    _______  , _______ , KC_BTN2 , KC_BTN3 , KC_BTN1 , KC_LPRN ,                                  KC_RPRN , KC_BSLS , _______ , _______ , _______ , _______ ,
+                         _______ , _______ , _______ , _______ , _______ ,              _______ , _______ , _______ ,           _______ , _______
   ),
 
   [3] = LAYOUT_universal(
-    _______  ,_______,        _______, KC_GRAVE, KC_QUOT  , KC_QUES ,                                          KC_EXLM , _______ , _______ , _______ , _______ , _______  ,
-    _______  ,KC_BSLS, KC_LCBR  , KC_LBRC , KC_LPRN  , KC_LABK ,                                               KC_RABK , KC_RPRN  , KC_RBRC, KC_RCBR , KC_SLSH  , _______ ,
-    _______  ,KC_SCLN, _______  , KC_UNDS , KC_MINS  , KC_PIPE ,                                               KC_EQL  , KC_PLUS, KC_MINS  , KC_ASTR , KC_SLSH, _______ ,
-                  _______ , _______  ,     _______ , _______  , _______  ,                              _______  , _______  , _______       , _______  , _______
+    _______ , _______ , _______ , KC_GRAVE , KC_QUOT , KC_QUES ,                                  KC_EXLM , _______ , _______ , _______ , _______ , _______ ,
+    _______ , KC_BSLS , KC_LCBR , KC_LBRC  , KC_LPRN , KC_LABK ,                                  KC_RABK , KC_RPRN , KC_RBRC , KC_RCBR , KC_SLSH , _______ ,
+    _______ , KC_SCLN , _______ , KC_UNDS  , KC_MINS , KC_PIPE ,                                  KC_EQL  , KC_PLUS , KC_MINS , KC_ASTR , KC_SLSH , _______ ,
+                        _______ , _______  , _______ , _______ , _______ ,              _______ , _______ , _______ ,           _______ , _______
   ),
   [4] = LAYOUT_universal(
-    _______  , _______  , KC_7     , KC_8    , KC_9  , KC_EQL,                                          _______  , _______  , KC_UP,     _______  ,  _______  , _______ ,
-    _______  , KC_SLSH  , KC_4     , KC_5    , KC_6  , KC_ASTR ,                                        _______  , KC_LEFT  , KC_DOWN,   KC_RIGHT  ,  _______  , _______ ,
-    _______  , KC_MINS  , KC_1     , KC_2    , KC_3  , KC_PLUS ,                                        _______  , _______  , _______  , _______  , _______  , _______ ,
-                  KC_0  , KC_0 ,   KC_DOT , KC_ENT  , KC_BSPC,                               _______  , _______  , _______       , _______  , _______
+    _______ , _______ , KC_7    , KC_8     , KC_9    , KC_EQL  ,                                  _______ , _______ , KC_UP   , _______  , _______ , _______ ,
+    _______ , KC_SLSH , KC_4    , KC_5     , KC_6    , KC_ASTR ,                                  _______ , KC_LEFT , KC_DOWN , KC_RIGHT , _______ , _______ ,
+    _______ , KC_MINS , KC_1    , KC_2     , KC_3    , KC_PLUS ,                                  _______ , _______ , _______ , _______  , _______ , _______ ,
+                        KC_0    , KC_0     , KC_DOT  , KC_ENT  , KC_BSPC ,              _______ , _______ , _______ ,           _______  , _______
   ),
 };
 // clang-format on
