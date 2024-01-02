@@ -253,7 +253,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
     case LCTL_LANG:
       if (record->event.pressed) {
-        if (get_mods() & MOD_MASK_SHIFT) {
+        if (get_mods() & MOD_MASK_ALT) {
           tap_code16(KC_LNG1);
           layer_on(NICOLA);
           return false;
