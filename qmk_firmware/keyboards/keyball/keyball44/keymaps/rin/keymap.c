@@ -21,8 +21,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "quantum.h"
 
 enum custom_layers {
-  NICOLA,
   DVORAK,
+  NICOLA,
 };
 
 enum custom_keycodes {
@@ -255,7 +255,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       if (record->event.pressed) {
         if (get_mods() & MOD_MASK_SHIFT) {
           tap_code16(KC_LNG1);
-          layer_off(DVORAK);
+          layer_on(NICOLA);
           return false;
         }
         lctl_timer = timer_read();
@@ -265,7 +265,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         unregister_mods(MOD_BIT(KC_LCTL));
         if (timer_elapsed(lctl_timer) < TAPPING_TERM) {
           tap_code16(KC_LNG2);
-          layer_on(DVORAK);
+          layer_off(NICOLA);
         }
       }
       return false;
@@ -382,13 +382,14 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-  [NICOLA] = LAYOUT_universal(
+  [DVORAK] = LAYOUT_universal(
     KC_TAB,  KC_QUOT, KC_COMM, KC_DOT, KC_P, KC_Y,                                  KC_F, KC_G, KC_C, KC_R, KC_L, KC_SLSH,
     LCTL_LANG,       KC_A,    KC_O,    KC_E,   KC_U, KC_I,                                  KC_D, KC_H, KC_T, KC_N, KC_S, KC_MINS,
     KC_LSFT,  KC_SCLN, KC_Q,    KC_J,   KC_K, KC_X,                                  KC_B, KC_M, KC_W, KC_V, KC_Z, KC_RSFT,
               KC_CAPS, KC_LALT, KC_LGUI, LT(2,KC_SPC), LT(3,KC_ESC),   LT(4,KC_ENT), KC_SPC, _______, _______, KC_BTN1
   ),
-  [DVORAK] = LAYOUT_universal(
+
+  [NICOLA] = LAYOUT_universal(
     _______, _______, _______, _______, _______, _______,                                   _______, _______, _______, _______, _______, _______,
     _______, _______, _______, _______, _______, _______,                                   _______, _______, _______, _______, _______, _______,
     _______, _______, _______, _______, _______, _______,                                   _______, _______, _______, _______, _______, _______,
