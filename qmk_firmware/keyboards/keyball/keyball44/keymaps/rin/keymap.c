@@ -150,6 +150,8 @@ const uint16_t PROGMEM nicola_zo[]     = {KC_LGUI, KC_M, COMBO_END};
 const uint16_t PROGMEM nicola_pe[]     = {KC_LGUI, KC_W, COMBO_END};
 const uint16_t PROGMEM nicola_bo[]     = {KC_LGUI, KC_V, COMBO_END};
 
+const uint16_t PROGMEM combo_esc[]     = {KC_E, KC_U, COMBO_END};
+
 combo_t key_combos[] = {
 // shifted characters with same-side thumb shift
   COMBO(nicola_xa,     NICOLA_XA),
@@ -209,6 +211,8 @@ combo_t key_combos[] = {
   COMBO(nicola_zo, NICOLA_ZO),
   COMBO(nicola_pe, NICOLA_PE),
   COMBO(nicola_bo, NICOLA_BO),
+
+  COMBO(combo_esc,  KC_ESC),
 };
 
 uint8_t mod_state;
