@@ -249,10 +249,22 @@ uint8_t mod_state;
 
 #define HANDLE_SHIFTED_NICOLA(keyname, keystring) \
   case NICOLA_##keyname: \
-    if (record->event.pressed) {    \
+    if (record->event.pressed) { \
       SEND_STRING(keystring); \
     } \
     return false
+
+#define HANDLE_SHIFTED_SYMBOL(code, code_shifted) \
+  case code: { \
+    if (record->event.pressed) { \
+      if (mod_state & MOD_MASK_SHIFT) { \
+        tap_code16(code_shifted); \
+        return false; \
+      } \
+      tap_code16(code); \
+      return false; \
+    } \
+  } \
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   static uint16_t lctl_timer;
@@ -383,6 +395,12 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     HANDLE_SHIFTED_NICOLA(PE, "pe");
     HANDLE_SHIFTED_NICOLA(BO, "bo");
 
+    HANDLE_SHIFTED_SYMBOL(KC_BSLS, KC_SLSH);
+    HANDLE_SHIFTED_SYMBOL(KC_LCBR, KC_RCBR);
+    HANDLE_SHIFTED_SYMBOL(KC_LBRC, KC_RBRC);
+    HANDLE_SHIFTED_SYMBOL(KC_LPRN, KC_RPRN);
+    HANDLE_SHIFTED_SYMBOL(KC_LABK, KC_RABK);
+
     default:
       return true;
   }
@@ -412,16 +430,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
 
   [3] = LAYOUT_universal(
-    _______ , _______ , _______ , KC_GRAVE , KC_QUOT , KC_QUES ,                                  KC_EXLM , _______ , _______ , _______ , _______ , _______ ,
-    _______ , KC_BSLS , KC_LCBR , KC_LBRC  , KC_LPRN , KC_LABK ,                                  KC_RABK , KC_RPRN , KC_RBRC , KC_RCBR , KC_SLSH , _______ ,
-    _______ , KC_SCLN , _______ , KC_UNDS  , KC_MINS , KC_PIPE ,                                  KC_EQL  , KC_PLUS , KC_MINS , KC_ASTR , KC_SLSH , _______ ,
-                        _______ , _______  , _______ , _______ , _______ ,              _______ , _______ , _______ ,           _______ , _______
-  ),
-  [4] = LAYOUT_universal(
-    _______ , _______ , KC_7    , KC_8     , KC_9    , KC_EQL  ,                                  _______ , _______ , KC_UP   , _______  , _______ , _______ ,
-    _______ , KC_SLSH , KC_4    , KC_5     , KC_6    , KC_ASTR ,                                  _______ , KC_LEFT , KC_DOWN , KC_RIGHT , _______ , _______ ,
-    _______ , KC_MINS , KC_1    , KC_2     , KC_3    , KC_PLUS ,                                  _______ , _______ , _______ , _______  , _______ , _______ ,
-                        KC_0    , KC_0     , KC_DOT  , KC_ENT  , KC_BSPC ,              _______ , _______ , _______ ,           _______  , _______
+    _______ , _______ , _______ , KC_GRAVE , KC_QUOT , KC_QUES ,                                  KC_EXLM , _______ , KC_UP   , _______  , _______ , _______ ,
+    _______ , KC_BSLS , KC_LCBR , KC_LBRC  , KC_LPRN , KC_LABK ,                                  _______ , KC_LEFT , KC_DOWN , KC_RIGHT , _______ , _______ ,
+    _______ , KC_SCLN , _______ , KC_UNDS  , KC_MINS , KC_PIPE ,                                  KC_EQL  , KC_PLUS , KC_MINS , KC_ASTR  , KC_SLSH , _______ ,
+                        _______ , _______  , _______ , _______ , _______ ,              _______ , _______ , _______ ,           _______  , _______
   ),
 };
 // clang-format on
