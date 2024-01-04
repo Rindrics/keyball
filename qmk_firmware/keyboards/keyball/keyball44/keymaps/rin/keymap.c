@@ -28,6 +28,7 @@ enum custom_layers {
 enum custom_keycodes {
   LCTL_LANG = SAFE_RANGE,
 // shifted characters with same-side thumb shift
+  TOGGLE_LINUX,
   NICOLA_XA,
   NICOLA_E,
   NICOLA_RI,
@@ -220,19 +221,30 @@ combo_t key_combos[] = {
 };
 
 uint8_t mod_state;
+bool is_linux = false;
 
-#define HANDLE_DVORAK_NICOLA(code_dvorak, code_qwerty, nicola_plain) \
+void toggle_linux_mode(void) {
+    is_linux = !is_linux;
+}
+
+#define HANDLE_DVORAK_NICOLA(code_dvorak, code_qwerty, nicola_plain, ctrl_shortcut) \
   case KC_##code_dvorak: { \
     if (record->event.pressed) { \
       if (mod_state & MOD_MASK_GUI) { \
         tap_code(KC_##code_qwerty); \
         return false; \
+      } else if (mod_state & MOD_MASK_CTRL) {   \
+        if (!is_linux & (ctrl_shortcut != KC_NO)) {       \
+          unregister_mods(MOD_MASK_CTRL); \
+          tap_code(ctrl_shortcut); \
+          register_code16(KC_LCTL); \
+          return false; \
+        } else { \
+          return true; \
+        } \
       } else if (layer_state_is(NICOLA)) { \
         if (mod_state) { \
           if (MOD_MASK_SHIFT) { \
-            return true; \
-          } \
-          if (MOD_MASK_CTRL) { \
             return true; \
           } \
         } else { \
@@ -271,6 +283,12 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
   mod_state = get_mods();
   switch (keycode) {
+    case TOGGLE_LINUX:
+      if (record->event.pressed) {
+        toggle_linux_mode();
+      }
+      return false;
+
     case LCTL_LANG:
       if (record->event.pressed) {
         if (get_mods() & MOD_MASK_ALT) {
@@ -304,38 +322,38 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       }
       return false; // 他のキーの動作に影響を与えない
 
-    HANDLE_DVORAK_NICOLA(QUOT, Q,    ".");
-    HANDLE_DVORAK_NICOLA(COMM, W,    "ka");
-    HANDLE_DVORAK_NICOLA(DOT,  E,    "ta");
-    HANDLE_DVORAK_NICOLA(P,    R,    "ko");
-    HANDLE_DVORAK_NICOLA(Y,    T,    "sa");
-    HANDLE_DVORAK_NICOLA(F,    Y,    "ra");
-    HANDLE_DVORAK_NICOLA(G,    U,    "ti");
-    HANDLE_DVORAK_NICOLA(C,    I,    "ku");
-    HANDLE_DVORAK_NICOLA(R,    O,    "tu");
-    HANDLE_DVORAK_NICOLA(L,    P,    ",");
-    HANDLE_DVORAK_NICOLA(SLSH, LBRC, "dousiyou");
-    HANDLE_DVORAK_NICOLA(A,    A,    "u");
-    HANDLE_DVORAK_NICOLA(O,    S,    "si");
-    HANDLE_DVORAK_NICOLA(E,    D,    "te");
-    HANDLE_DVORAK_NICOLA(U,    F,    "ke");
-    HANDLE_DVORAK_NICOLA(I,    G,    "se");
-    HANDLE_DVORAK_NICOLA(D,    H,    "ha");
-    HANDLE_DVORAK_NICOLA(H,    J,    "to");
-    HANDLE_DVORAK_NICOLA(T,    K,    "ki");
-    HANDLE_DVORAK_NICOLA(N,    L,    "i");
-    HANDLE_DVORAK_NICOLA(S,    SCLN, "nn");
-    HANDLE_DVORAK_NICOLA(MINS, QUOT, "dousiyou");
-    HANDLE_DVORAK_NICOLA(SCLN, Z,    "dousiyou");
-    HANDLE_DVORAK_NICOLA(Q,    X,    "hi");
-    HANDLE_DVORAK_NICOLA(J,    C,    "su");
-    HANDLE_DVORAK_NICOLA(K,    V,    "fu");
-    HANDLE_DVORAK_NICOLA(X,    B,    "he");
-    HANDLE_DVORAK_NICOLA(B,    N,    "me");
-    HANDLE_DVORAK_NICOLA(M,    M,    "so");
-    HANDLE_DVORAK_NICOLA(W,    COMM, "ne");
-    HANDLE_DVORAK_NICOLA(V,    DOT,  "ho");
-    HANDLE_DVORAK_NICOLA(Z,    SLSH, "dousiyou");
+    HANDLE_DVORAK_NICOLA(QUOT, Q,    ".",  KC_NO);
+    HANDLE_DVORAK_NICOLA(COMM, W,    "ka", KC_NO);
+    HANDLE_DVORAK_NICOLA(DOT,  E,    "ta", KC_NO);
+    HANDLE_DVORAK_NICOLA(P,    R,    "ko", KC_UP);
+    HANDLE_DVORAK_NICOLA(Y,    T,    "sa", KC_NO);
+    HANDLE_DVORAK_NICOLA(F,    Y,    "ra", KC_RIGHT);
+    HANDLE_DVORAK_NICOLA(G,    U,    "ti", KC_NO);
+    HANDLE_DVORAK_NICOLA(C,    I,    "ku", KC_NO);
+    HANDLE_DVORAK_NICOLA(R,    O,    "tu", KC_NO);
+    HANDLE_DVORAK_NICOLA(L,    P,    ",", KC_NO);
+    HANDLE_DVORAK_NICOLA(SLSH, LBRC, "dousiyou", KC_NO);
+    HANDLE_DVORAK_NICOLA(A,    A,    "u",  LGUI(KC_LEFT));
+    HANDLE_DVORAK_NICOLA(O,    S,    "si", KC_NO);
+    HANDLE_DVORAK_NICOLA(A,    D,    "te", LGUI(KC_RIGHT));
+    HANDLE_DVORAK_NICOLA(U,    F,    "ke", KC_NO);
+    HANDLE_DVORAK_NICOLA(I,    G,    "se", KC_TAB);
+    HANDLE_DVORAK_NICOLA(D,    H,    "ha", KC_NO); // collided with vim page down
+    HANDLE_DVORAK_NICOLA(H,    J,    "to", KC_BSPC);
+    HANDLE_DVORAK_NICOLA(T,    K,    "ki", KC_NO);
+    HANDLE_DVORAK_NICOLA(N,    L,    "i", KC_DOWN);
+    HANDLE_DVORAK_NICOLA(S,    SCLN, "nn", KC_NO);
+    HANDLE_DVORAK_NICOLA(MINS, QUOT, "dousiyou", KC_NO);
+    HANDLE_DVORAK_NICOLA(SCLN, Z,    "dousiyou", KC_NO);
+    HANDLE_DVORAK_NICOLA(Q,    X,    "hi", KC_NO);
+    HANDLE_DVORAK_NICOLA(J,    C,    "su", KC_NO);
+    HANDLE_DVORAK_NICOLA(K,    V,    "fu", KC_NO);
+    HANDLE_DVORAK_NICOLA(X,    B,    "he", KC_NO);
+    HANDLE_DVORAK_NICOLA(B,    N,    "me", KC_LEFT);
+    HANDLE_DVORAK_NICOLA(M,    M,    "so", KC_ENT);
+    HANDLE_DVORAK_NICOLA(W,    COMM, "ne", KC_NO);
+    HANDLE_DVORAK_NICOLA(V,    DOT,  "ho", KC_NO);
+    HANDLE_DVORAK_NICOLA(Z,    SLSH, "dousiyou", KC_NO);
     // shifted characters with same-side thumb shift
     HANDLE_SHIFTED_NICOLA(XA,     "xa");
     HANDLE_SHIFTED_NICOLA(E,      "e");
@@ -412,7 +430,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_TAB    , KC_QUOT , KC_COMM , KC_DOT  , KC_P    , KC_Y         ,                                  KC_F   , KC_G    , KC_C    , KC_R    , KC_L    , KC_SLSH ,
     LCTL_LANG , KC_A    , KC_O    , KC_E    , KC_U    , KC_I         ,                                  KC_D   , KC_H    , KC_T    , KC_N    , KC_S    , KC_MINS ,
     KC_LSFT   , KC_SCLN , KC_Q    , KC_J    , KC_K    , KC_X         ,                                  KC_B   , KC_M    , KC_W    , KC_V    , KC_Z    , KC_RSFT ,
-                          KC_CAPS , KC_LALT , KC_LGUI , LCTL_T(KC_SPC) , LT(2,KC_ESC),            LT(3,KC_ENT) , KC_SPC ,           _______ , _______ , KC_BTN1
+                          KC_CAPS , KC_LALT , KC_LGUI , LCTL_T(KC_SPC) , LT(2,KC_ESC),            LT(3,KC_ENT) , KC_SPC ,           _______ , _______ , TOGGLE_LINUX
   ),
 
   [NICOLA] = LAYOUT_universal(
