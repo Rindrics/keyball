@@ -433,8 +433,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [3] = LAYOUT_universal(
     _______  , _______ , KC_GRAVE , KC_QUOT , KC_QUES , _______ ,                                       _______ , _______ , KC_UP   , _______  , _______ , _______ ,
-    _______  , KC_LCBR , KC_RCBR  , KC_LBRC , KC_RBRC , KC_PIPE ,                                       KC_PLUS , KC_LEFT , KC_DOWN , KC_RIGHT , _______ , _______ ,
-    _______  , KC_LPRN , KC_RPRN  , KC_LABK , KC_RABK , _______ ,                                       KC_EQL  , _______ , _______ , _______  , _______ , _______ ,
+    _______  , KC_LCBR , KC_RCBR  , KC_LPRN , KC_RPRN , KC_PIPE ,                                       KC_PLUS , KC_LEFT , KC_DOWN , KC_RIGHT , _______ , _______ ,
+    _______  , KC_LBRC , KC_RBRC  , KC_LABK , KC_RABK , _______ ,                                       KC_EQL  , _______ , _______ , _______  , _______ , _______ ,
                          _______  , _______ , _______ , KC_BSLS , KC_SLSH ,                   _______ , _______ ,           _______ , _______  , _______
   ),
 };
