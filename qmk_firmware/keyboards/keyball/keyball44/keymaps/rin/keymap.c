@@ -155,7 +155,6 @@ const uint16_t PROGMEM combo_ent[]     = {KC_H,    KC_N,    COMBO_END};
 const uint16_t PROGMEM combo_btn1[]    = {KC_H,    KC_T,    COMBO_END};
 const uint16_t PROGMEM combo_btn2[]    = {KC_T,    KC_N,    COMBO_END};
 
-#define COMBO_TERM = 40;
 combo_t key_combos[] = {
 // shifted characters with same-side thumb shift
   COMBO(nicola_xa,     NICOLA_XA),
