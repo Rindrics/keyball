@@ -413,10 +413,10 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [DVORAK] = LAYOUT_universal(
-    _______        , KC_QUOT , KC_COMM , KC_DOT  , KC_P    , KC_Y          ,                                     KC_F    , KC_G    , KC_C    , KC_R    , KC_L          , KC_TILDE ,
-    KC_TAB      , KC_A    , KC_O    , KC_E    , KC_U    , KC_I          ,                                     KC_D    , KC_H    , KC_T    , KC_N    , KC_S          , KC_MINS  ,
-    KC_RSFT , KC_SCLN , KC_Q    , KC_J    , KC_K    , KC_X          ,                                     KC_B    , KC_M    , KC_W    , KC_V    , KC_Z          , KC_RSFT  ,
-                               KC_CAPS , LCTL_LANG , KC_LGUI , LCTL_T(KC_NO) , LT(2,KC_NO),        LT(3,KC_ENT) ,  KC_SPC  ,           _______ , _______ , RGUI(KC_BSPC)
+    _______ , KC_QUOT , KC_COMM , KC_DOT    , KC_P    , KC_Y          ,                                     KC_F    , KC_G    , KC_C    , KC_R    , KC_L          , KC_TILDE ,
+    KC_TAB  , KC_A    , KC_O    , KC_E      , KC_U    , KC_I          ,                                     KC_D    , KC_H    , KC_T    , KC_N    , KC_S          , KC_MINS  ,
+    KC_RSFT , KC_SCLN , KC_Q    , KC_J      , KC_K    , KC_X          ,                                     KC_B    , KC_M    , KC_W    , KC_V    , KC_Z          , KC_RSFT  ,
+                        KC_CAPS , LCTL_LANG , KC_LGUI , LCTL_T(KC_NO) , LT(2,KC_NO),        LT(3,KC_ENT) ,  KC_SPC  ,           _______ , _______ , RGUI(KC_BSPC)
   ),
 
   [NICOLA] = LAYOUT_universal(
