@@ -151,6 +151,7 @@ const uint16_t PROGMEM nicola_pe[]     = {KC_LGUI, KC_W,    COMBO_END};
 const uint16_t PROGMEM nicola_bo[]     = {KC_LGUI, KC_V,    COMBO_END};
 
 const uint16_t PROGMEM combo_esc[]     = {KC_E,    KC_U,    COMBO_END};
+const uint16_t PROGMEM combo_lalt[]    = {KC_M,    KC_W,    COMBO_END};
 const uint16_t PROGMEM combo_ent[]     = {KC_H,    KC_N,    COMBO_END};
 const uint16_t PROGMEM combo_btn1[]    = {KC_H,    KC_T,    COMBO_END};
 const uint16_t PROGMEM combo_btn2[]    = {KC_T,    KC_N,    COMBO_END};
@@ -216,6 +217,7 @@ combo_t key_combos[] = {
   COMBO(nicola_bo, NICOLA_BO),
 
   COMBO(combo_esc,  KC_ESC),
+  COMBO(combo_lalt, KC_LALT),
   COMBO(combo_ent,  KC_ENT),
   COMBO(combo_btn1, KC_BTN1),
   COMBO(combo_btn2, KC_BTN2),
