@@ -308,6 +308,15 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       }
       return false; // 他のキーの動作に影響を与えない
 
+    case KC_TAB:
+      if (record->event.pressed) {
+        if (get_mods() & MOD_MASK_ALT) {
+          tap_code16(KC_SLSH);
+          return false;
+        }
+        return true;
+      }
+
     HANDLE_DVORAK_NICOLA(QUOT, Q,    ".");
     HANDLE_DVORAK_NICOLA(COMM, W,    "ka");
     HANDLE_DVORAK_NICOLA(DOT,  E,    "ta");
