@@ -270,6 +270,23 @@ uint8_t mod_state;
     } \
   } \
 
+#define HANDLE_NUMBER(keycode, fnkey, fnkey_shifted)      \
+  case keycode: { \
+    if (record->event.pressed) { \
+      if (mod_state & MOD_MASK_ALT) { \
+        if (mod_state & MOD_MASK_SHIFT) { \
+          tap_code16(fnkey_shifted);          \
+          return false; \
+        } else { \
+          tap_code16(fnkey); \
+          return false; \
+        } \
+      } else { \
+        return true; \
+      } \
+    } \
+  }
+
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   static uint16_t lctl_timer;
 
@@ -316,6 +333,17 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         }
         return true;
       }
+
+    HANDLE_NUMBER(KC_1, KC_F1,  KC_F11);
+    HANDLE_NUMBER(KC_2, KC_F2,  KC_F12);
+    HANDLE_NUMBER(KC_3, KC_F3,  KC_NO);
+    HANDLE_NUMBER(KC_4, KC_F4,  KC_NO);
+    HANDLE_NUMBER(KC_5, KC_F5,  KC_NO);
+    HANDLE_NUMBER(KC_6, KC_F6,  KC_NO);
+    HANDLE_NUMBER(KC_7, KC_F7,  KC_NO);
+    HANDLE_NUMBER(KC_8, KC_F8,  KC_NO);
+    HANDLE_NUMBER(KC_9, KC_F9,  KC_NO);
+    HANDLE_NUMBER(KC_0, KC_F10, KC_NO);
 
     HANDLE_DVORAK_NICOLA(QUOT, Q,    ".");
     HANDLE_DVORAK_NICOLA(COMM, W,    "ka");
