@@ -298,18 +298,12 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
           tap_code16(KC_LNG1);
           layer_on(NICOLA);
           return false;
-        }
-        lctl_timer = timer_read();
-        // register_mods(MOD_BIT(KC_LCTL));
-        return false;
-      } else {
-        // unregister_mods(MOD_BIT(KC_LCTL));
-        if (timer_elapsed(lctl_timer) < TAPPING_TERM) {
+        } else {
           tap_code16(KC_LNG2);
           layer_off(NICOLA);
+          return false;
         }
       }
-      return false;
 
     case LCTL_T(KC_ESC):
       if (record->event.pressed) {
