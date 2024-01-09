@@ -26,7 +26,7 @@ enum custom_layers {
 };
 
 enum custom_keycodes {
-  LCTL_LANG = SAFE_RANGE,
+  SWITCH_LANG = SAFE_RANGE,
 // shifted characters with same-side thumb shift
   NICOLA_XA,
   NICOLA_E,
@@ -292,7 +292,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
   mod_state = get_mods();
   switch (keycode) {
-    case LCTL_LANG:
+    case SWITCH_LANG:
       if (record->event.pressed) {
         if (get_mods() & MOD_MASK_ALT) {
           tap_code16(KC_LNG1);
@@ -453,7 +453,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _______ , KC_QUOT , KC_COMM , KC_DOT    , KC_P    , KC_Y          ,                                     KC_F    , KC_G    , KC_C    , KC_R    , KC_L          , KC_TILDE ,
     KC_TAB  , KC_A    , KC_O    , KC_E      , KC_U    , KC_I          ,                                     KC_D    , KC_H    , KC_T    , KC_N    , KC_S          , KC_MINS  ,
     KC_RSFT , KC_SCLN , KC_Q    , KC_J      , KC_K    , KC_X          ,                                     KC_B    , KC_M    , KC_W    , KC_V    , KC_Z          , KC_RSFT  ,
-                        KC_CAPS , LCTL_LANG , KC_LGUI , KC_LCTL, LT(2,KC_NO),        LT(3,KC_ENT) ,  KC_SPC  ,           _______ , _______ , RGUI(KC_BSPC)
+                        KC_CAPS , SWITCH_LANG , KC_LGUI , KC_LCTL, LT(2,KC_NO),        LT(3,KC_ENT) ,  KC_SPC  ,           _______ , _______ , RGUI(KC_BSPC)
   ),
 
   [NICOLA] = LAYOUT_universal(
