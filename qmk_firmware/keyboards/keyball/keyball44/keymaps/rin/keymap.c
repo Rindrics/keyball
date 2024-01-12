@@ -26,9 +26,8 @@ enum custom_layers {
 };
 
 enum custom_keycodes {
-  SWITCH_LANG = SAFE_RANGE,
 // shifted characters with same-side thumb shift
-  NICOLA_XA,
+  NICOLA_XA = SAFE_RANGE,
   NICOLA_E,
   NICOLA_RI,
   NICOLA_XYA,
@@ -292,22 +291,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
   mod_state = get_mods();
   switch (keycode) {
-    case SWITCH_LANG:
-      if (record->event.pressed) {
-        if (get_mods() & MOD_MASK_ALT) {
-          tap_code16(KC_LNG1);
-          layer_on(NICOLA);
-          return false;
-        } else if (get_mods() & MOD_MASK_SHIFT) {
-          tap_code16(KC_CAPS);
-          return false;
-        } else {
-          tap_code16(KC_LNG2);
-          layer_off(NICOLA);
-          return false;
-        }
-      }
-
     case KC_SPC:
       if (get_mods() & MOD_MASK_GUI) {
         if (get_mods() & MOD_MASK_ALT) {
@@ -351,15 +334,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         }
       }
       return false; // 他のキーの動作に影響を与えない
-
-    case KC_TAB:
-      if (record->event.pressed) {
-        if (get_mods() & MOD_MASK_ALT) {
-          tap_code16(KC_SLSH);
-          return false;
-        }
-        return true;
-      }
 
     HANDLE_NUMBER(KC_1, KC_F1,  KC_F11);
     HANDLE_NUMBER(KC_2, KC_F2,  KC_F12);
@@ -477,7 +451,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [DVORAK] = LAYOUT_universal(
-    SWITCH_LANG , KC_QUOT , KC_COMM , KC_DOT    , KC_P    , KC_Y          ,                                     KC_F    , KC_G    , KC_C    , KC_R    , KC_L          , KC_TILDE ,
+    KC_SLSH , KC_QUOT , KC_COMM , KC_DOT    , KC_P    , KC_Y          ,                                     KC_F    , KC_G    , KC_C    , KC_R    , KC_L          , KC_TILDE ,
     KC_TAB  , KC_A    , KC_O    , KC_E      , KC_U    , KC_I          ,                                     KC_D    , KC_H    , KC_T    , KC_N    , KC_S          , KC_MINS  ,
     KC_RSFT , KC_SCLN , KC_Q    , KC_J      , KC_K    , KC_X          ,                                     KC_B    , KC_M    , KC_W    , KC_V    , KC_Z          , KC_RSFT  ,
                         _______ , KC_LALT , KC_LGUI , KC_LCTL, LT(2,KC_NO),        LT(3,KC_ENT) ,  KC_SPC  ,           _______ , _______ , RGUI_T(KC_BSPC)
