@@ -257,18 +257,6 @@ uint8_t mod_state;
     } \
     return false
 
-#define HANDLE_SHIFTED_SYMBOL(code, code_shifted) \
-  case code: { \
-    if (record->event.pressed) { \
-      if (mod_state & MOD_MASK_SHIFT) { \
-        tap_code16(code_shifted); \
-        return false; \
-      } \
-      tap_code16(code); \
-      return false; \
-    } \
-  } \
-
 #define HANDLE_NUMBER(keycode, fnkey, fnkey_shifted)      \
   case keycode: { \
     if (record->event.pressed) { \
@@ -287,8 +275,6 @@ uint8_t mod_state;
   }
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-  static uint16_t lctl_timer;
-
   mod_state = get_mods();
   switch (keycode) {
     case KC_SPC:
@@ -320,20 +306,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
           }
         }
       }
-
-    case LCTL_T(KC_ESC):
-      if (record->event.pressed) {
-        lctl_timer = timer_read();
-        // 通常のLCTLの動作を有効にする
-        register_mods(MOD_BIT(KC_LCTL));
-      } else {
-        unregister_mods(MOD_BIT(KC_LCTL));
-        if (timer_elapsed(lctl_timer) < TAPPING_TERM) {
-          // タップされた場合、ESCを送出
-          tap_code(KC_ESC);
-        }
-      }
-      return false; // 他のキーの動作に影響を与えない
 
     HANDLE_NUMBER(KC_1, KC_F1,  KC_F11);
     HANDLE_NUMBER(KC_2, KC_F2,  KC_F12);
@@ -436,12 +408,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     HANDLE_SHIFTED_NICOLA(ZO, "zo");
     HANDLE_SHIFTED_NICOLA(PE, "pe");
     HANDLE_SHIFTED_NICOLA(BO, "bo");
-
-    HANDLE_SHIFTED_SYMBOL(KC_BSLS, KC_SLSH);
-    HANDLE_SHIFTED_SYMBOL(KC_LCBR, KC_RCBR);
-    HANDLE_SHIFTED_SYMBOL(KC_LBRC, KC_RBRC);
-    HANDLE_SHIFTED_SYMBOL(KC_LPRN, KC_RPRN);
-    HANDLE_SHIFTED_SYMBOL(KC_LABK, KC_RABK);
 
     default:
       return true;
