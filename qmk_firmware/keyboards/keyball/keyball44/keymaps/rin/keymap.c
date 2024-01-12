@@ -473,9 +473,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [3] = LAYOUT_universal(
     KC_BSLS  , _______ , KC_GRAVE , KC_QUOT , KC_QUES , _______ ,                                       _______ , _______ , KC_UP   , _______  , _______ , _______ ,
-    _______  , KC_LCBR , KC_RCBR  , KC_LPRN , KC_RPRN , KC_PIPE ,                                       KC_PLUS , KC_LEFT , KC_DOWN , KC_RIGHT , _______ , _______ ,
-    _______  , KC_LBRC , KC_RBRC  , KC_LABK , KC_RABK , _______ ,                                       KC_EQL  , _______ , _______ , _______  , _______ , _______ ,
-                         _______  , _______ , _______ , _______ , _______ ,                   _______ , _______ ,           _______ , _______  , _______
+    _______  , KC_LCBR , KC_RCBR  , KC_LPRN , KC_RPRN , KC_PIPE ,                                       _______ , KC_LEFT , KC_DOWN , KC_RIGHT , _______ , _______ ,
+    _______  , KC_LBRC , KC_RBRC  , KC_LABK , KC_RABK , KC_PLUS ,                                       _______ , _______ , _______ , _______  , _______ , _______ ,
+                         _______  , _______ , _______ , KC_EQL  , _______ ,                   _______ , _______ ,           _______ , _______  , _______
   ),
 };
 // clang-format on
