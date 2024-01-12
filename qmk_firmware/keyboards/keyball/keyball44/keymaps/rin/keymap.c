@@ -308,6 +308,16 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         }
       }
 
+    case KC_TILDE:
+      if (record->event.pressed) {
+        if (get_mods() == MOD_BIT(KC_RGUI)) {
+          if (get_mods() == MOD_BIT(KC_RSFT)) {
+            tap_code16(KC_RCTL);
+            return false;
+          }
+        }
+      }
+
     case LCTL_T(KC_ESC):
       if (record->event.pressed) {
         lctl_timer = timer_read();
