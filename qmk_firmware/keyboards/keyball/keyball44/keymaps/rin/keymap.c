@@ -308,6 +308,26 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         }
       }
 
+    case KC_SPC:
+      if (get_mods() & MOD_MASK_GUI) {
+        if (get_mods() & MOD_MASK_ALT) {
+          if (record->event.pressed) {
+            unregister_mods(MOD_BIT(KC_LGUI));
+            tap_code16(KC_LNG1);
+            layer_on(NICOLA);
+            return false;
+          }
+        } else {
+          if (record->event.pressed) {
+            unregister_mods(MOD_BIT(KC_LGUI));
+            tap_code16(KC_LNG2);
+            layer_off(NICOLA);
+            return false;
+          }
+        }
+      }
+      return true;
+
     case KC_TILDE:
       if (record->event.pressed) {
         if (get_mods() == MOD_BIT(KC_RGUI)) {
