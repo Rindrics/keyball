@@ -362,7 +362,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     HANDLE_DVORAK_NICOLA(C,    I,    "ku");
     HANDLE_DVORAK_NICOLA(R,    O,    "tu");
     HANDLE_DVORAK_NICOLA(L,    P,    ",");
-    HANDLE_DVORAK_NICOLA(SLSH, LBRC, "dousiyou");
+    HANDLE_DVORAK_NICOLA(SLSH, LBRC, "");
     HANDLE_DVORAK_NICOLA(A,    A,    "u");
     HANDLE_DVORAK_NICOLA(O,    S,    "si");
     HANDLE_DVORAK_NICOLA(E,    D,    "te");
@@ -373,8 +373,8 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     HANDLE_DVORAK_NICOLA(T,    K,    "ki");
     HANDLE_DVORAK_NICOLA(N,    L,    "i");
     HANDLE_DVORAK_NICOLA(S,    SCLN, "nn");
-    HANDLE_DVORAK_NICOLA(MINS, QUOT, "dousiyou");
-    HANDLE_DVORAK_NICOLA(SCLN, Z,    "dousiyou");
+    HANDLE_DVORAK_NICOLA(MINS, QUOT, "");
+    HANDLE_DVORAK_NICOLA(SCLN, Z,    "");
     HANDLE_DVORAK_NICOLA(Q,    X,    "hi");
     HANDLE_DVORAK_NICOLA(J,    C,    "su");
     HANDLE_DVORAK_NICOLA(K,    V,    "fu");
@@ -383,7 +383,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     HANDLE_DVORAK_NICOLA(M,    M,    "so");
     HANDLE_DVORAK_NICOLA(W,    COMM, "ne");
     HANDLE_DVORAK_NICOLA(V,    DOT,  "ho");
-    HANDLE_DVORAK_NICOLA(Z,    SLSH, "dousiyou");
+    HANDLE_DVORAK_NICOLA(Z,    SLSH, "");
     // shifted characters with same-side thumb shift
     HANDLE_SHIFTED_NICOLA(XA,     "xa");
     HANDLE_SHIFTED_NICOLA(E,      "e");
