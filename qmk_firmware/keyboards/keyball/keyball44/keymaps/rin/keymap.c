@@ -222,16 +222,15 @@ combo_t key_combos[] = {
   COMBO(combo_btn2, KC_BTN2),
 };
 
-uint8_t mod_state;
 
 #define HANDLE_DVORAK_NICOLA(code_dvorak, code_qwerty, nicola_plain) \
   case KC_##code_dvorak: { \
     if (record->event.pressed) { \
-      if (mod_state & MOD_MASK_GUI) { \
+      if (get_mods() & MOD_MASK_GUI) { \
         tap_code(KC_##code_qwerty); \
         return false; \
       } else if (layer_state_is(NICOLA)) { \
-        if (mod_state) { \
+        if (get_mods()) { \
           if (MOD_MASK_SHIFT) { \
             return true; \
           } \
@@ -260,8 +259,8 @@ uint8_t mod_state;
 #define HANDLE_NUMBER(keycode, fnkey, fnkey_shifted)      \
   case keycode: { \
     if (record->event.pressed) { \
-      if (mod_state & MOD_MASK_ALT) { \
-        if (mod_state & MOD_MASK_SHIFT) { \
+      if (get_mods() & MOD_MASK_ALT) { \
+        if (get_mods() & MOD_MASK_SHIFT) { \
           tap_code16(fnkey_shifted);          \
           return false; \
         } else { \
@@ -275,7 +274,6 @@ uint8_t mod_state;
   }
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-  mod_state = get_mods();
   switch (keycode) {
     case KC_SPC:
       if (get_mods() & MOD_MASK_GUI) {
