@@ -222,6 +222,27 @@ combo_t key_combos[] = {
   COMBO(combo_btn2, KC_BTN2),
 };
 
+// key overrides
+const key_override_t up_override        = ko_make_basic(MOD_MASK_CTRL, KC_P, KC_UP);
+const key_override_t down_override      = ko_make_basic(MOD_MASK_CTRL, KC_N, KC_DOWN);
+const key_override_t right_override     = ko_make_basic(MOD_MASK_CTRL, KC_F, KC_RIGHT);
+const key_override_t left_override      = ko_make_basic(MOD_MASK_CTRL, KC_B, KC_LEFT);
+const key_override_t tab_override       = ko_make_basic(MOD_MASK_CTRL, KC_I, KC_TAB);
+const key_override_t enter_override     = ko_make_basic(MOD_MASK_CTRL, KC_M, KC_ENT);
+const key_override_t backspace_override = ko_make_basic(MOD_MASK_CTRL, KC_H, KC_BSPC);
+const key_override_t delete_override    = ko_make_basic(MOD_MASK_CTRL, RGUI_T(KC_BSPC), KC_DEL); // to avoid collision with vim Ctrl+D
+
+const key_override_t **key_overrides = (const key_override_t *[]){
+	&up_override,
+	&down_override,
+	&right_override,
+	&left_override,
+	&tab_override,
+	&enter_override,
+	&backspace_override,
+	&delete_override,
+	NULL
+};
 
 #define HANDLE_DVORAK_NICOLA(code_dvorak, code_qwerty, nicola_plain) \
   case KC_##code_dvorak: { \
