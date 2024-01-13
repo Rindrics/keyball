@@ -21,8 +21,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "quantum.h"
 
 enum custom_layers {
-  DVORAK,
-  NICOLA,
+  DVORAK_NICOLA,
 };
 
 enum custom_keycodes {
@@ -244,13 +243,14 @@ const key_override_t **key_overrides = (const key_override_t *[]){
 	NULL
 };
 
+static bool is_nicola;
 #define HANDLE_DVORAK_NICOLA(code_dvorak, code_qwerty, nicola_plain) \
   case KC_##code_dvorak: { \
     if (record->event.pressed) { \
       if (get_mods() & MOD_MASK_GUI) { \
         tap_code(KC_##code_qwerty); \
         return false; \
-      } else if (layer_state_is(NICOLA)) { \
+      } else if (is_nicola) { \
         if (get_mods()) { \
           if (MOD_MASK_SHIFT) { \
             return true; \
@@ -302,14 +302,14 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
           if (record->event.pressed) {
             unregister_mods(MOD_BIT(KC_LGUI));
             tap_code16(KC_LNG1);
-            layer_on(NICOLA);
+            is_nicola = true;
             return false;
           }
         } else {
           if (record->event.pressed) {
             unregister_mods(MOD_BIT(KC_LGUI));
             tap_code16(KC_LNG2);
-            layer_off(NICOLA);
+            is_nicola = false;
             return false;
           }
         }
@@ -435,28 +435,21 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-  [DVORAK] = LAYOUT_universal(
+  [DVORAK_NICOLA] = LAYOUT_universal(
     KC_SLSH , KC_QUOT , KC_COMM , KC_DOT  , KC_P    , KC_Y    ,                                     KC_F    , KC_G    , KC_C    , KC_R    , KC_L            , KC_TILDE ,
     KC_TAB  , KC_A    , KC_O    , KC_E    , KC_U    , KC_I    ,                                     KC_D    , KC_H    , KC_T    , KC_N    , KC_S            , KC_MINS  ,
     KC_RSFT , KC_SCLN , KC_Q    , KC_J    , KC_K    , KC_X    ,                                     KC_B    , KC_M    , KC_W    , KC_V    , KC_Z            , KC_RSFT  ,
                         _______ , KC_LALT , KC_LGUI , KC_LCTL , LT(2,KC_NO),        LT(3,KC_ENT) ,  KC_SPC  ,           _______ , _______ , RGUI_T(KC_BSPC)
   ),
 
-  [NICOLA] = LAYOUT_universal(
-    _______ , _______ , _______ , _______ , _______ , _______ ,                                        _______ , _______ , _______ , _______ , _______ , _______ ,
-    _______ , _______ , _______ , _______ , _______ , _______ ,                                        _______ , _______ , _______ , _______ , _______ , _______ ,
-    _______ , _______ , _______ , _______ , _______ , _______ ,                                        _______ , _______ , _______ , _______ , _______ , _______ ,
-                        _______ , _______ , _______ , _______ , _______ ,                    _______ , _______ ,           _______ , _______ , _______
-  ),
-
-  [2] = LAYOUT_universal(
+  [1] = LAYOUT_universal(
     _______  , _______ , _______ , _______ , _______ , _______ ,                                       _______ , _______ , _______ , _______ , _______ , _______ ,
     _______  , KC_1    , KC_2    , KC_3    , KC_4    , KC_5    ,                                       KC_6    , KC_7    , KC_8    , KC_9    , KC_0    , _______ ,
     _______  , S(KC_1) , S(KC_2) , S(KC_3) , S(KC_4) , S(KC_5) ,                                       S(KC_6) , S(KC_7) , S(KC_8) , S(KC_9) , S(KC_0) , _______  ,
                          _______ , _______ , _______ , _______ , _______ ,                   _______ , _______ ,           _______ , _______ , _______
   ),
 
-  [3] = LAYOUT_universal(
+  [2] = LAYOUT_universal(
     KC_BSLS  , _______ , KC_GRAVE , KC_QUOT , KC_QUES , _______ ,                                       _______ , _______ , KC_UP   , _______  , _______ , _______ ,
     _______  , KC_LCBR , KC_RCBR  , KC_LPRN , KC_RPRN , KC_PIPE ,                                       _______ , KC_LEFT , KC_DOWN , KC_RIGHT , _______ , _______ ,
     _______  , KC_LBRC , KC_RBRC  , KC_LABK , KC_RABK , KC_PLUS ,                                       _______ , _______ , _______ , _______  , _______ , _______ ,
