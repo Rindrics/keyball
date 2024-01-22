@@ -283,7 +283,9 @@ static bool is_nicola;
   case keycode: { \
     if (record->event.pressed) { \
       if (get_mods() & MOD_MASK_ALT) { \
+        unregister_mods(MOD_MASK_ALT); \
         if (get_mods() & MOD_MASK_SHIFT) { \
+          unregister_mods(MOD_MASK_SHIFT); \
           tap_code16(fnkey_shifted);          \
           return false; \
         } else { \
