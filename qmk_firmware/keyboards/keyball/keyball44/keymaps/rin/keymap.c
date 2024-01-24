@@ -449,7 +449,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_TILDE , KC_QUOT , KC_COMM , KC_DOT  , KC_P    , KC_Y    ,                                     KC_F     , KC_G    , KC_C    , KC_R    , KC_L    , KC_ENT   ,
     KC_TAB   , KC_A    , KC_O    , KC_E    , KC_U    , KC_I    ,                                     KC_D     , KC_H    , KC_T    , KC_N    , KC_S    , KC_MINS  ,
     KC_RSFT  , KC_SCLN , KC_Q    , KC_J    , KC_K    , KC_X    ,                                     KC_B     , KC_M    , KC_W    , KC_V    , KC_Z    , KC_RSFT  ,
-                         _______ , KC_LGUI , KC_LALT , KC_LCTL , LT(NUMBER,KC_TAB),        LT(SYMBOL,KC_SLSH) , KC_SPC  ,           _______ , _______ , RGUI_T(KC_BSPC)
+                       LSG(KC_4) , KC_LGUI , KC_LALT , KC_LCTL , LT(NUMBER,KC_TAB),        LT(SYMBOL,KC_SLSH) , KC_SPC  ,           _______ , _______ , RGUI_T(KC_BSPC)
   ),
 
   [NUMBER] = LAYOUT_universal(
@@ -463,7 +463,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _______  , _______ , KC_GRAVE , KC_QUOT , KC_QUES , _______ ,                                       _______ , _______ , KC_UP   , _______  , _______ , _______ ,
     _______  , KC_LCBR , KC_RCBR  , KC_LPRN , KC_RPRN , KC_PIPE ,                                       _______ , KC_LEFT , KC_DOWN , KC_RIGHT , _______ , _______ ,
     _______  , KC_LBRC , KC_RBRC  , KC_LABK , KC_RABK , KC_PLUS ,                                       _______ , _______ , _______ , _______  , _______ , _______ ,
-                         _______  , _______ , _______ , KC_EQL  , KC_BSLS ,                   _______ , _______ ,           _______ , _______  , _______
+                       LSG(KC_3)  , _______ , _______ , KC_EQL  , KC_BSLS ,                   _______ , _______ ,           _______ , _______  , _______
   ),
 };
 // clang-format on
