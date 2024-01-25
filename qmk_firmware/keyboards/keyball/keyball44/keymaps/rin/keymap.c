@@ -307,19 +307,21 @@ static bool is_nicola;
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
     case KC_SPC:
-      if (get_mods() & MOD_MASK_GUI) {
+      if (record->event.pressed) {
+        if (get_mods() & MOD_MASK_CTRL) {
+          unregister_mods(MOD_MASK_CTRL);
+          tap_code16(KC_LNG1);
+          is_nicola = true;
+          return false;
+        }
         if (get_mods() & MOD_MASK_ALT) {
-          if (record->event.pressed) {
-            unregister_mods(MOD_BIT(KC_LGUI));
-            tap_code16(KC_LNG1);
-            is_nicola = true;
+          unregister_mods(MOD_MASK_ALT);
+          tap_code16(KC_LNG2);
+          is_nicola = false;
+          if (get_mods() & MOD_MASK_SHIFT) {
+            tap_code16(LALT(KC_SPC)); // easier than sending 'return true' with mod handling
             return false;
-          }
-        } else {
-          if (record->event.pressed) {
-            unregister_mods(MOD_BIT(KC_LGUI));
-            tap_code16(KC_LNG2);
-            is_nicola = false;
+          } else {
             return false;
           }
         }
