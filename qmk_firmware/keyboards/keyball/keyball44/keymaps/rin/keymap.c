@@ -252,6 +252,7 @@ const key_override_t **key_overrides = (const key_override_t *[]){
 };
 
 static bool is_nicola;
+static bool is_temporal_dvorak;
 #define HANDLE_DVORAK_NICOLA(code_dvorak, code_qwerty, nicola_plain) \
   case KC_##code_dvorak: { \
     if (record->event.pressed) { \
@@ -299,10 +300,22 @@ static bool is_nicola;
           return false; \
         } \
       } else { \
+        if (is_nicola) { \
+          tap_code16(KC_LNG2); \
+          is_nicola = false; \
+          is_temporal_dvorak = true; \
+        } \
+        return true; \
+      } \
+    } else { \
+      if (is_temporal_dvorak) { \
+        tap_code16(KC_LNG1); \
+        is_nicola = true; \
+        is_temporal_dvorak = false; \
         return true; \
       } \
     } \
-  }
+  } \
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
