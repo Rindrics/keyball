@@ -85,6 +85,7 @@ enum custom_keycodes {
   NICOLA_ZO,
   NICOLA_PE,
   NICOLA_BO,
+  TO_NICOLA,
 };
 
 const uint16_t PROGMEM nicola_xa[]     = {KC_LCTL, KC_QUOT, COMBO_END};
@@ -157,6 +158,7 @@ const uint16_t PROGMEM combo_guialt[]  = {KC_H,    KC_N,    COMBO_END};
 const uint16_t PROGMEM combo_btn1[]    = {KC_M,    KC_W,    COMBO_END};
 const uint16_t PROGMEM combo_btn2[]    = {KC_W,    KC_V,    COMBO_END};
 const uint16_t PROGMEM combo_btn1_left[] = {KC_J,    KC_K,    COMBO_END};
+const uint16_t PROGMEM combo_to_nicola[] = {KC_LCTL, KC_SPC,COMBO_END};
 
 combo_t key_combos[] = {
 // shifted characters with same-side thumb shift
@@ -226,6 +228,7 @@ combo_t key_combos[] = {
   COMBO(combo_btn1, KC_BTN1),
   COMBO(combo_btn2, KC_BTN2),
   COMBO(combo_btn1_left, KC_BTN1),
+  COMBO(combo_to_nicola, TO_NICOLA),
 };
 
 // key overrides
@@ -318,14 +321,15 @@ static bool is_temporal_dvorak;
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
+    case TO_NICOLA:
+      if (record->event.pressed) {
+        unregister_mods(MOD_MASK_CTRL);
+        tap_code16(KC_LNG1);
+        is_nicola = true;
+        return true;
+      }
     case KC_SPC:
       if (record->event.pressed) {
-        if (get_mods() & MOD_MASK_CTRL) {
-          unregister_mods(MOD_MASK_CTRL);
-          tap_code16(KC_LNG1);
-          is_nicola = true;
-          return false;
-        }
         if (get_mods() & MOD_MASK_ALT) {
           unregister_mods(MOD_MASK_ALT);
           tap_code16(KC_LNG2);
