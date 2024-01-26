@@ -85,7 +85,6 @@ enum custom_keycodes {
   NICOLA_ZO,
   NICOLA_PE,
   NICOLA_BO,
-  MID_DOT,
 };
 
 const uint16_t PROGMEM nicola_xa[]     = {KC_LCTL, KC_QUOT, COMBO_END};
