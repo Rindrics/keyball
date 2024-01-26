@@ -157,7 +157,7 @@ const uint16_t PROGMEM combo_lgui[]    = {KC_T,    KC_N,    COMBO_END};
 const uint16_t PROGMEM combo_guialt[]  = {KC_H,    KC_N,    COMBO_END};
 const uint16_t PROGMEM combo_btn1[]    = {KC_M,    KC_W,    COMBO_END};
 const uint16_t PROGMEM combo_btn2[]    = {KC_W,    KC_V,    COMBO_END};
-const uint16_t PROGMEM combo_btn1_left[] = {KC_J,    KC_K,    COMBO_END};
+const uint16_t PROGMEM combo_btn1_left[] = {KC_J,  KC_K,    COMBO_END};
 const uint16_t PROGMEM combo_to_nicola[] = {KC_LCTL, KC_SPC,COMBO_END};
 
 combo_t key_combos[] = {
